@@ -6,3 +6,5 @@ flycheck*
 /pyvenv.cfg
 /lib/
 /bin/
+/.emacs.d/
+/tests/.emacs.d/

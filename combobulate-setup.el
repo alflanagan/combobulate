@@ -509,26 +509,19 @@ Try reinstalling the grammar for that language and try again."
 
 The buffer's language is `%s' and does not match Combobulate's
 expected language of `%s'. This can happen if you have major
-modes with conflicting ideas of what type of language to use."
-                     (current-buffer) (car-safe existing-parsers) language)))
-          ;; Okay. All good, then... Create the language parser.
-          (combobulate-create-language language (current-buffer) nil)
-          (let ((toggle (if (combobulate-read minor-mode name) -1 1)))
-            (prog1
-                (funcall minor-mode-fn toggle)
-              (when (and (> toggle 0) called-interactively)
-                (combobulate-message
-                 (substitute-command-keys "Activating Combobulate. Type \\[combobulate] to start."))))))))))
+modes with conflicting ideas of what type of language to use.
 
-;;;###autoload
-(defun combobulate-mode (&optional arg &rest _)
-  "Navigate and edit by syntactic constructs.
+You can customize `combobulate-registered-languages-alist' if you have specific tree-sitter language requirements for certain major modes."
+                   (current-buffer) (car-safe existing-parsers) language)))
+        ;; Okay. All good, then... Create the language parser.
+        (combobulate-create-language language (current-buffer) nil)
+        (let ((toggle (if (combobulate-read minor-mode language) -1 1)))
+          (prog1
+              (funcall minor-mode-fn toggle)
+            (when (and (> toggle 0) called-interactively)
+              (combobulate-message
+               (substitute-command-keys "Activating Combobulate. Type \\[combobulate] to start."))))))))))
 
-This is a helper command that tries to activate the right
-Combobulate minor mode suitable for the current buffer."
-  (interactive "p")
-  ;; This is no longer an actual minor mode, but instead a function.
-  (combobulate-maybe-activate nil (not (null arg))))
 
 (defun combobulate-register-language (language major-modes minor-mode-fn)
   "Register a Combobulate language.
@@ -666,7 +659,8 @@ support where you still want to use Combobulate's features."
                    :interactive nil
                    ;; This is the generic setup function that is
                    ;; always run.
-                   (combobulate-setup)
+                   (when ,minor-mode-fn (combobulate-setup))
+                   (setq combobulate-mode ,minor-mode-fn)
                    ;; If a language has a custom setup function, we
                    ;; run it with the language we are being
                    ;; triggered in.
