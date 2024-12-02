@@ -4,6 +4,7 @@
        '((css . ("https://github.com/tree-sitter/tree-sitter-css" "v0.20.0"))
          (html . ("https://github.com/tree-sitter/tree-sitter-html" "v0.20.1"))
          (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.1" "src"))
+         (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0"))
          (json . ("https://github.com/tree-sitter/tree-sitter-json" "v0.20.2"))
          (go . ("https://github.com/tree-sitter/tree-sitter-go" "v0.20.0"))
          (ocaml . ("https://github.com/tree-sitter/tree-sitter-ocaml" "v0.24.2" "grammars/ocaml/src"))
