@@ -3,6 +3,7 @@ flycheck*
 *#*
 /.envrc
 .claude/settings.local.json
+.claude/worktrees/
 
 /pyvenv.cfg
 /lib/
