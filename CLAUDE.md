@@ -1,3 +1,5 @@
+<!-- -*- fill-column: 80 -*- -->
+<div style="width: 768px; margin-left: 28px;">
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -63,6 +65,7 @@ emacs --batch --no-init-file --chdir ./tests/ -L .. -L . -l tests/.ts-setup.el -
 ### Language Modules
 
 Each language has its own file (`combobulate-python.el`, `combobulate-js-ts.el`, etc.) that defines:
+
 - **Procedures** for each operation type: `procedures-sibling`, `procedures-hierarchy`, `procedures-edit`, `procedures-sexp`, `procedures-defun`
 - **Envelope templates** for code generation
 - **Pretty-print functions** for node name display
@@ -73,6 +76,7 @@ To add a new language: create `combobulate-<lang>.el`, define the procedure sets
 ### Test Infrastructure
 
 Tests use ERT (Emacs Regression Testing) with a fixture-based approach:
+
 - Raw fixtures live in `tests/fixtures/` as code snippets with before/after states
 - `make build-tests` runs `generate-harnesses.el` to produce `tests/test-*.gen.el` files
 - **Never edit `.gen.el` files** — they are regenerated from fixtures
@@ -87,3 +91,4 @@ Tests use ERT (Emacs Regression Testing) with a fixture-based approach:
 3. **Carousel for complex edits**: Multi-step transformations (e.g., changing a for-loop to a list comprehension) use the carousel interface to preview and accept changes incrementally.
 
 4. **Generated rules**: `combobulate-rules.el` is derived from tree-sitter grammar JSON files via `build/build-relationships.py`. This keeps the rules accurate as grammars evolve.
+</div>
